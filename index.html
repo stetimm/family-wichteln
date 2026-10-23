@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="referrer" content="no-referrer">
+    <meta name="robots" content="noindex">
+    <meta name="description" content="Private Christmas gift exchange links.">
+    <meta name="theme-color" content="#1b6b43">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; script-src 'self'; base-uri 'none'; form-action 'none'">
+    <title>Secret Santa</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <noscript>
+      <p class="card noscript">This page needs JavaScript. The draw stays in your browser and is not sent to a server.</p>
+    </noscript>
+
+    <main>
+      <section id="organizer" class="card" hidden>
+        <p class="kicker">Christmas</p>
+        <h1>Secret Santa</h1>
+        <p class="lede">Check the eight people, then create one private link for each of them. The draw stays in this browser and nothing is uploaded.</p>
+
+        <div class="field">
+          <label for="couples">Couples</label>
+          <p id="couples-hint" class="hint">Four lines. Each line is a couple id, then two names, separated by commas.</p>
+          <textarea id="couples" rows="6" spellcheck="false" autocomplete="off" autocapitalize="off" aria-describedby="couples-hint"></textarea>
+        </div>
+
+        <div id="message" class="message" hidden></div>
+
+        <label class="testing-toggle" for="testing-mode">
+          <input id="testing-mode" type="checkbox">
+          <span>Testing Mode – Show assignments and validation results</span>
+        </label>
+
+        <button id="generate" class="primary" type="button">Generate Links</button>
+
+        <section id="distribution" hidden>
+          <h2 id="distribution-heading" tabindex="-1">Private links</h2>
+          <p>Send each person only their own link. This page does not show who anyone is buying for. Download a backup before you close the tab. These links are not saved in the browser.</p>
+          <p class="hint">Editing the couples above does not change links that were already created.</p>
+          <table class="links">
+            <thead>
+              <tr>
+                <th scope="col">Participant</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody id="link-rows"></tbody>
+          </table>
+          <button id="download" class="secondary download" type="button">Download Links</button>
+        </section>
+
+        <section id="test-result" hidden>
+          <h2 id="test-heading" tabindex="-1">Generated Assignment</h2>
+          <table class="sheet">
+            <thead>
+              <tr>
+                <th scope="col">Giver</th>
+                <th scope="col">Recipient 1</th>
+                <th scope="col">Recipient 2</th>
+              </tr>
+            </thead>
+            <tbody id="assignment-rows"></tbody>
+          </table>
+          <h2>Validation Results</h2>
+          <ul id="validation-checks" class="checks"></ul>
+          <p id="validation-summary" class="summary"></p>
+        </section>
+      </section>
+
+      <section id="participant" class="card" hidden>
+        <h1 id="greeting"></h1>
+        <p>You are Secret Santa for:</p>
+        <ul id="recipients" class="recipients"></ul>
+        <p class="note">Keep this link private. Anyone who has it can see this page.</p>
+      </section>
+
+      <section id="result-error" class="card" hidden>
+        <h1>This link doesn't work</h1>
+        <p id="result-error-text"></p>
+      </section>
+    </main>
+
+    <p id="status" class="visually-hidden" role="status" aria-live="polite"></p>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
