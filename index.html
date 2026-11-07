@@ -7,7 +7,7 @@
     <meta name="robots" content="noindex">
     <meta name="description" content="Private Christmas gift exchange links.">
     <meta name="theme-color" content="#1b6b43">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; script-src 'self'; base-uri 'none'; form-action 'none'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; script-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'">
     <title>Secret Santa</title>
     <link rel="stylesheet" href="style.css">
   </head>
@@ -69,12 +69,31 @@
           <ul id="validation-checks" class="checks"></ul>
           <p id="validation-summary" class="summary"></p>
         </section>
+
+        <section id="coordination" class="coordination">
+          <h2>Import Existing Draw for Co-Giver Coordination</h2>
+          <p id="existing-links-hint" class="hint">Paste the eight original participant links, one per line. A downloaded links file also works. Import reads those links and does not create a new draw.</p>
+          <div class="field">
+            <label for="existing-links">Existing participant links</label>
+            <textarea id="existing-links" rows="10" spellcheck="false" autocomplete="off" autocapitalize="off" aria-describedby="existing-links-hint"></textarea>
+          </div>
+          <button id="import-links" class="secondary" type="button">Import &amp; Validate</button>
+          <div id="coordination-message" class="message" hidden></div>
+          <div id="coordination-report" hidden>
+            <h2>Validation Results</h2>
+            <ul id="coordination-checks" class="checks"></ul>
+            <p id="coordination-summary" class="summary"></p>
+          </div>
+          <button id="generate-coordination" class="primary download" type="button" disabled>Generate Encrypted Coordination File</button>
+          <p class="hint">This downloads <code>coordination.json</code> (version 1). Add that file to the repository root and publish the site. Existing participant links stay the same. The file hides co-giver names from casual reading. It is not strong encryption.</p>
+        </section>
       </section>
 
       <section id="participant" class="card" hidden>
         <h1 id="greeting"></h1>
         <p>You are Secret Santa for:</p>
         <ul id="recipients" class="recipients"></ul>
+        <p id="coordination-note" class="note coordination-note" hidden aria-live="polite">Gift coordination information is not available yet.</p>
         <p class="note">Keep this link private. Anyone who has it can see this page.</p>
       </section>
 

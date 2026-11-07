@@ -22,7 +22,7 @@ A result link uses the page address plus a `#result=` fragment. The fragment is 
 ## Publish with GitHub Pages
 
 1. Create a GitHub repository.
-2. Add `index.html`, `style.css`, `app.js`, `assignment.js`, and this README.
+2. Add `index.html`, `style.css`, `app.js`, `assignment.js`, `coordination.js`, and this README.
 3. In the repository settings, open **Pages**.
 4. Deploy from the `main` branch and the root folder.
 5. Open the HTTPS address GitHub gives you, such as `https://USERNAME.github.io/REPOSITORY/`.
@@ -52,10 +52,31 @@ A kept draw has these properties:
 
 The page runs that same validator again before it builds links. A result that fails is discarded. Testing Mode uses the same generator and the same validator, then shows the eight rows and the individual checks.
 
+## Co-giver coordination
+
+A participant can see who else is buying for each of their two recipients. The original links stay the same. Nobody gets a new link, and the page does not draw again.
+
+`coordination.json` is version 1. It contains eight encrypted entries and no names. It is not created by **Generate Links**. The organizer downloads it, adds it to the repository root beside `index.html`, then commits and pushes. After GitHub Pages publishes that file, the existing links show the extra detail.
+
+1. Open the organizer page.
+2. Leave the couple list as it was for the original draw.
+3. Paste the eight original links, one per line. The downloaded links file works too.
+4. Choose **Import & Validate**. The page rebuilds that draw and checks it with the same assignment rules.
+5. Choose **Generate Encrypted Coordination File** and keep `coordination.json`.
+6. Add that file to the repository root and publish the site.
+
+Each key is derived in the browser with Web Crypto. The input is a fixed label, the participant's name, and their two recipients in the link's order. A separate label selects that person's entry. A new random value is used for every entry. The file is meant to stop someone from reading co-giver names by opening it. It is not strong secrecy: those keys come from the small set of valid assignments, and a determined person could try the possibilities.
+
+Imported links, the rebuilt draw, and keys stay in memory for that visit. They are not written to browser storage or sent to a server.
+
+If `coordination.json` is missing, damaged, or cannot be opened, the participant still sees their two recipients. The page adds the note "Gift coordination information is not available yet."
+
 ## Files
 
 - `index.html` — page structure
 - `style.css` — layout
 - `app.js` — both screens, name checks, and link encoding
 - `assignment.js` — the draw and its validation
+- `coordination.js` — co-giver encryption for existing links
+- `coordination.json` — version 1 file the organizer adds after import; the site works before it exists
 - `README.md` — this guide
